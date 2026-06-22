@@ -4,6 +4,12 @@ Reproduction of the
 *"MedTriage-LM: Anatomically Grounded Visual Phenotype Synthesis for
 Interpretable ED Triage."*
 
+<p align="center">
+  <img src="data/framework.png" alt="MedTriage-LM Reproduction" width="85%"/>
+  <br>
+  <em>MedTriage-LM: Anatomically Grounded Visual Phenotype Synthesis for Interpretable ED Triage.</em>
+</p>
+
 The paper proposes an interpretable emergency-department (ED) triage model that
 **synthesizes "Visual Phenotype Maps" (VPMs) from tabular + text clinical data**. It injects an anatomical visual prior *without* needing any real patient
 photographs and fuses that synthetic visual modality with the clinical state
