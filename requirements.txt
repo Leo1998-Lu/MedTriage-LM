@@ -1,0 +1,35 @@
+# =============================================================================
+# MedTriage-LM -- Python dependencies
+# -----------------------------------------------------------------------------
+# The default (offline / CPU) reproduction profile needs ONLY the core packages
+# below. The whole pipeline -- preprocessing, cross-validation, training,
+# evaluation and VPM visualisation -- runs with just these, no internet and no
+# GPU, on the bundled MIMIC-IV-ED demo cohort.
+#
+#     pip install -r requirements.txt
+#
+# The "optional" packages at the bottom are needed ONLY if you switch the
+# pluggable backbones on to reproduce the paper's full-scale setting
+# (ClinicalBERT text encoder, timm ViT vision encoder, Qwen3-VL rationale
+# generation, real BERTScore). They require a GPU + internet to download
+# pretrained weights. Install them on demand, e.g.:
+#
+#     pip install "transformers>=4.44" timm bert-score
+# =============================================================================
+
+# --- core (required, offline path) ---
+torch>=2.2
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+scipy>=1.10
+matplotlib>=3.7
+PyYAML>=6.0
+tqdm>=4.65
+
+# --- optional (full-scale / paper backbones; need GPU + internet) ---
+# transformers>=4.44     # ClinicalBERT text encoder + Qwen3-VL rationale backbone
+# timm>=1.0              # pretrained ViT vision encoder
+# bert-score>=0.3.13     # real BERTScore for rationale evaluation (else token-overlap proxy)
+# accelerate>=0.30       # convenience for multi-GPU / mixed precision with transformers
+# sentencepiece>=0.2     # tokenizer dependency for some HF backbones

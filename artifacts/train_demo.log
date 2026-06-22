@@ -1,0 +1,84 @@
+======================================================================
+Cross-validation
+======================================================================
+
+=== Fold 1/5 (train=165, val=42) ===
+  epoch   1/40  loss=27.748  acc=0.452  f1=0.208  auroc=0.699  rat=0.175
+  epoch   6/40  loss=6.763  acc=0.071  f1=0.044  auroc=0.470  rat=0.739
+  epoch  12/40  loss=5.676  acc=0.476  f1=0.215  auroc=0.671  rat=0.742
+  epoch  18/40  loss=4.831  acc=0.357  f1=0.325  auroc=0.678  rat=0.766
+  epoch  24/40  loss=4.412  acc=0.381  f1=0.343  auroc=0.602  rat=0.749
+  epoch  30/40  loss=4.014  acc=0.333  f1=0.279  auroc=0.627  rat=0.751
+  epoch  36/40  loss=3.649  acc=0.595  f1=0.508  auroc=0.655  rat=0.769
+  epoch  40/40  loss=3.645  acc=0.452  f1=0.330  auroc=0.678  rat=0.767
+  fold 1 best: accuracy=0.571  macro_f1=0.513  auroc=0.616  auprc=0.531  bertscore_proxy_f1=0.773
+
+=== Fold 2/5 (train=165, val=42) ===
+  epoch   1/40  loss=30.366  acc=0.071  f1=0.044  auroc=0.478  rat=0.611
+  epoch   6/40  loss=6.665  acc=0.452  f1=0.208  auroc=0.510  rat=0.734
+  epoch  12/40  loss=5.937  acc=0.476  f1=0.215  auroc=0.796  rat=0.730
+  epoch  18/40  loss=4.776  acc=0.643  f1=0.441  auroc=0.837  rat=0.761
+  epoch  24/40  loss=4.141  acc=0.524  f1=0.470  auroc=0.748  rat=0.768
+  epoch  30/40  loss=3.789  acc=0.643  f1=0.648  auroc=0.800  rat=0.771
+  epoch  36/40  loss=3.561  acc=0.548  f1=0.498  auroc=0.698  rat=0.769
+  epoch  40/40  loss=3.339  acc=0.667  f1=0.667  auroc=0.687  rat=0.776
+  fold 2 best: accuracy=0.667  macro_f1=0.667  auroc=0.687  auprc=0.682  bertscore_proxy_f1=0.776
+
+=== Fold 3/5 (train=166, val=41) ===
+  epoch   1/40  loss=27.058  acc=0.098  f1=0.059  auroc=0.602  rat=0.443
+  epoch   6/40  loss=6.913  acc=0.463  f1=0.211  auroc=0.562  rat=0.737
+  epoch  12/40  loss=6.278  acc=0.439  f1=0.203  auroc=0.502  rat=0.719
+  epoch  18/40  loss=5.129  acc=0.439  f1=0.203  auroc=0.564  rat=0.731
+  epoch  24/40  loss=4.550  acc=0.463  f1=0.457  auroc=0.721  rat=0.786
+  epoch  30/40  loss=3.987  acc=0.463  f1=0.457  auroc=0.688  rat=0.784
+  epoch  36/40  loss=3.882  acc=0.585  f1=0.556  auroc=0.650  rat=0.776
+  epoch  40/40  loss=3.662  acc=0.585  f1=0.575  auroc=0.645  rat=0.788
+  fold 3 best: accuracy=0.659  macro_f1=0.670  auroc=0.688  auprc=0.702  bertscore_proxy_f1=0.787
+
+=== Fold 4/5 (train=166, val=41) ===
+  epoch   1/40  loss=31.572  acc=0.098  f1=0.059  auroc=0.336  rat=0.730
+  epoch   6/40  loss=6.795  acc=0.463  f1=0.211  auroc=0.420  rat=0.741
+  epoch  12/40  loss=6.184  acc=0.439  f1=0.203  auroc=0.691  rat=0.720
+  epoch  18/40  loss=5.406  acc=0.341  f1=0.350  auroc=0.816  rat=0.761
+  epoch  24/40  loss=4.703  acc=0.488  f1=0.406  auroc=0.729  rat=0.766
+  epoch  30/40  loss=4.289  acc=0.561  f1=0.416  auroc=0.783  rat=0.794
+  epoch  36/40  loss=3.831  acc=0.634  f1=0.459  auroc=0.691  rat=0.801
+  epoch  40/40  loss=3.858  acc=0.634  f1=0.457  auroc=0.771  rat=0.799
+  fold 4 best: accuracy=0.659  macro_f1=0.635  auroc=0.816  auprc=0.822  bertscore_proxy_f1=0.803
+
+=== Fold 5/5 (train=166, val=41) ===
+  epoch   1/40  loss=31.145  acc=0.439  f1=0.203  auroc=0.458  rat=0.698
+  epoch   6/40  loss=6.786  acc=0.439  f1=0.203  auroc=0.522  rat=0.731
+  epoch  12/40  loss=6.030  acc=0.341  f1=0.340  auroc=0.623  rat=0.732
+  epoch  18/40  loss=4.852  acc=0.463  f1=0.436  auroc=0.591  rat=0.756
+  epoch  24/40  loss=4.440  acc=0.512  f1=0.346  auroc=0.534  rat=0.742
+  epoch  30/40  loss=4.172  acc=0.439  f1=0.304  auroc=0.664  rat=0.743
+  epoch  36/40  loss=3.761  acc=0.512  f1=0.362  auroc=0.623  rat=0.760
+  epoch  40/40  loss=3.539  acc=0.512  f1=0.364  auroc=0.603  rat=0.760
+  fold 5 best: accuracy=0.585  macro_f1=0.564  auroc=0.554  auprc=0.483  bertscore_proxy_f1=0.758
+
+===== Cross-validation summary (mean +/- 95% CI) =====
+metric              mean      95% CI     (n)
+accuracy           0.6281  +/-0.0401   (5)
+macro_f1           0.6096  +/-0.0604   (5)
+auroc              0.6723  +/-0.0859   (5)
+auprc              0.6440  +/-0.1203   (5)
+bertscore_proxy_f1 0.7793  +/-0.0149   (5)
+
+Saved CV results -> artifacts/cv_results.json
+
+======================================================================
+Training final model on the full cohort
+======================================================================
+  epoch   1/40  loss=31.681  acc=0.476  f1=0.215  auroc=0.602  rat=0.723
+  epoch   6/40  loss=6.764  acc=0.071  f1=0.044  auroc=0.211  rat=0.734
+  epoch  12/40  loss=5.926  acc=0.476  f1=0.215  auroc=0.764  rat=0.742
+  epoch  18/40  loss=4.902  acc=0.619  f1=0.428  auroc=0.766  rat=0.789
+  epoch  24/40  loss=4.413  acc=0.429  f1=0.307  auroc=0.762  rat=0.790
+  epoch  30/40  loss=3.981  acc=0.500  f1=0.412  auroc=0.685  rat=0.772
+  epoch  36/40  loss=3.798  acc=0.452  f1=0.387  auroc=0.683  rat=0.762
+  epoch  40/40  loss=3.599  acc=0.571  f1=0.476  auroc=0.694  rat=0.784
+
+Trained MedTriage-LM with 729,783 parameters.
+
+Saved checkpoint -> artifacts/medtriage_lm.pt

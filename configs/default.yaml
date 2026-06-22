@@ -1,0 +1,120 @@
+# =============================================================================
+# MedTriage-LM default configuration  (offline / CPU reproduction profile)
+# -----------------------------------------------------------------------------
+# Keys mirror the dataclass fields in:
+#   preprocess -> medtriage.data.preprocess.PreprocessConfig
+#   model      -> medtriage.models.medtriage_lm.MedTriageLMConfig
+#   train      -> medtriage.trainer.TrainConfig
+#
+# This profile trains the FULL architecture end-to-end with lightweight,
+# from-scratch backbones so it runs with no internet and no GPU. To reproduce
+# the paper's full-scale setting, flip the *_backbone switches (see the
+# commented block at the bottom) and run on a machine with GPU + weights.
+# =============================================================================
+
+preprocess:
+  data_dir: data                     # directory holding the 6 MIMIC-IV-ED CSVs
+  critical_rule: high_acuity_admit   # {high_acuity_admit, esi1, admitted}
+  drop_unlabeled_acuity: true        # rows without acuity have no derivable label
+  text_field: chiefcomplaint
+
+model:
+  # --- task dimensions ---
+  num_regions: 12
+  n_instruction_classes: 3
+
+  # --- clinical state encoder (FT-Transformer) ---
+  ft_d_token: 64
+  ft_n_blocks: 2
+  ft_n_heads: 4
+  ft_ffn_mult: 2.0
+
+  # --- text encoder ---
+  text_backbone: lite                # {lite, clinicalbert}
+  text_d_model: 64
+  text_n_blocks: 2
+  text_n_heads: 4
+  text_max_len: 32
+  text_hf_name: emilyalsentzer/Bio_ClinicalBERT
+  text_freeze: true
+
+  d_state: 128                       # latent clinical state z
+
+  # --- anatomical region mapper ---
+  mapper_hidden: 64
+
+  # --- field generator / VPM ---
+  vpm_height: 64
+  vpm_width: 48
+  vpm_alpha: 0.6
+  vpm_channels: 3                    # 3 = RGB pseudo-jet, 1 = grayscale
+  field_base_sigma_scale: 1.0
+  body_masked: true
+
+  # --- vision encoder ---
+  vision_backbone: lite              # {lite, timm}
+  vit_d_model: 96
+  vit_patch: 8
+  vit_n_blocks: 2
+  vit_n_heads: 4
+  vit_use_cls: true
+  vit_timm_name: vit_tiny_patch16_224
+
+  # --- cross-modal integration ---
+  fusion_d_model: 128
+  fusion_n_heads: 4
+  fusion_ffn_mult: 2.0
+
+  # --- prediction heads ---
+  head_hidden: 64
+
+  # --- rationale decoder ---
+  use_rationale: true
+  rationale_backend: lite            # {lite, qwen, none}
+  rationale_d_model: 96
+  rationale_n_blocks: 2
+  rationale_n_heads: 4
+  rationale_max_len: 48
+
+  # --- regularisation ---
+  dropout: 0.1
+
+train:
+  epochs: 40
+  batch_size: 32
+  lr: 0.002
+  weight_decay: 0.0001
+  grad_clip: 1.0
+  seed: 0
+  device: cpu
+  num_workers: 0
+  n_folds: 5
+  val_fraction: 0.2
+  text_max_len: 32
+  rationale_max_len: 48
+  use_class_weight: true
+  use_pos_weight: true
+  use_rationale: true
+  use_real_bertscore: false          # true requires the bert_score package + net
+  log_every: 0
+  num_threads: 0                     # 0 = leave torch default
+
+# Loss weights are fixed to the paper values inside medtriage.losses.LossWeights
+# (lambda1=0.5, lambda2=1.0, lambda3=0.5, lambda4=1.0).
+
+# =============================================================================
+# Full-scale (paper) overrides -- requires GPU + internet + downloaded weights.
+# Copy these into the blocks above to switch backbones.
+# -----------------------------------------------------------------------------
+# model:
+#   text_backbone: clinicalbert
+#   text_d_model: 256          # projection dim from ClinicalBERT's 768
+#   vision_backbone: timm
+#   vit_timm_name: vit_base_patch16_224
+#   vit_d_model: 256
+#   rationale_backend: qwen    # prompt-based Qwen rationale generation
+# train:
+#   device: cuda
+#   epochs: 100
+#   num_workers: 4
+# =============================================================================
